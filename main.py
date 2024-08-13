@@ -1,6 +1,7 @@
 import flet as ft
 
 def main(page: ft.Page):
+    # メモ部を生成する関数
     def create_new_memo():
         return ft.Container(
             content=ft.Column(
@@ -15,7 +16,8 @@ def main(page: ft.Page):
                         hint_text="ここにメモを入力",
                         hint_style=ft.TextStyle(color=ft.colors.BLACK26),
                         text_size=17,
-                        border=ft.InputBorder.NONE
+                        border=ft.InputBorder.NONE,
+                        multiline=True
                     ),
                 ]
             ),
@@ -24,10 +26,28 @@ def main(page: ft.Page):
             border_radius=20
         )
 
+    def add_memo(e):
+        memo_column.controls.append(create_new_memo())
+        memo_column.update()
+
     memo_column = ft.Column(
-        controls=[create_new_memo(), create_new_memo(), create_new_memo()]
+        controls=[]
     )
 
-    page.add(memo_column)
+    add_button = ft.Row(
+        controls=[
+            ft.FilledTonalButton(
+                content=ft.Text(
+                    value="メモを追加",
+                    size=20
+                ),
+                height=50,
+                expand=1,
+                on_click=add_memo,
+            )
+        ]
+    )
+
+    page.add(memo_column, add_button)
 
 ft.app(main)

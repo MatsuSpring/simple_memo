@@ -17,7 +17,7 @@ def main(page: ft.Page):
                         hint_style=ft.TextStyle(color=ft.colors.BLACK26),
                         text_size=17,
                         border=ft.InputBorder.NONE,
-                        multiline=True
+                        multiline=True      # 複数行入力可能にする
                     ),
                 ]
             ),
@@ -26,15 +26,18 @@ def main(page: ft.Page):
             border_radius=20
         )
 
+    # メモを追加する関数
     def add_memo(e):
         memo_column.controls.append(create_new_memo())
         memo_column.update()
 
+    # メモを表示するためのColumn
     memo_column = ft.Column(
         controls=[]
     )
 
-    add_button = ft.Row(
+    # メモを追加するためのボタン
+    add_button = ft.Row(    # ボタンを横方向に伸ばすために(expandプロパティを使用)、Rowを使用
         controls=[
             ft.FilledTonalButton(
                 content=ft.Text(
@@ -42,7 +45,7 @@ def main(page: ft.Page):
                     size=20
                 ),
                 height=50,
-                expand=1,
+                expand=1,   # ボタンを横に伸ばす
                 on_click=add_memo,
             )
         ]
